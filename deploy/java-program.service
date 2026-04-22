@@ -1,0 +1,17 @@
+[Unit]
+Description=java-program Spring Boot service
+After=network.target
+
+[Service]
+Type=simple
+User=javaapp
+WorkingDirectory=/opt/java-program
+ExecStart=/usr/bin/java -jar /opt/java-program/java-program.jar
+Restart=always
+RestartSec=5
+SuccessExitStatus=143
+Environment=SPRING_PROFILES_ACTIVE=prod
+
+[Install]
+WantedBy=multi-user.target
+
