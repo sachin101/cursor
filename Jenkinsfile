@@ -1,5 +1,11 @@
 pipeline {
-  agent any
+  agent {
+    // Requires Docker on the Jenkins agent.
+    docker {
+      image 'maven:3.9.9-eclipse-temurin-21'
+      args '-v $HOME/.m2:/root/.m2'
+    }
+  }
 
   options {
     timestamps()
@@ -21,7 +27,6 @@ pipeline {
 
     stage('Build & test') {
       steps {
-        // Requires Maven on the Jenkins agent (or configure a Docker agent).
         sh 'mvn -B -ntp clean test'
       }
     }
